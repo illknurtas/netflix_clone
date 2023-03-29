@@ -1,16 +1,49 @@
 import Input from "@/components/input";
 import { useCallback, useState } from "react";
+import axios from "axios";
+import {signIn} from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Auth = () =>{
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     const[name, setName] = useState('');
 
+    const router = useRouter();
+
     const [variant, setVariant] = useState('login');
     const toggleVar = useCallback(()=>{
         setVariant((currentVariant) => currentVariant ==="login" ? "signup" : "login" );
     },[])
 
+    const login = useCallback(async()=>{
+        try {
+            await signIn("credentials",{
+                email,
+                password,
+                redirect : false,
+                callbackUrl:"/"
+            });
+            router.push("/");
+        } catch (error) {
+            console.log(error);
+        }
+    },[email, password, router]);
+
+    const register = useCallback(async()=>{
+        try{
+            await axios.post("/api/register",{
+                email,
+                name,
+                password
+            });
+            login();
+        }catch(error){
+            console.log(error);
+        }
+    },[email,name,password, login]);
+
+    
     return(
         <div className="relative h-full w-full
         bg-[url('/img/bg.jpg')]
@@ -39,7 +72,8 @@ const Auth = () =>{
                             onChange={(eve : any)=> setPassword(eve.target.value)}/>
                         </div>
                         <button className="bg-[#e50815] py-3 text-white
-                        rounded-md w-full mt-10 hover:bg-[#dc2626] transition">
+                        rounded-md w-full mt-10 hover:bg-[#dc2626] transition"
+                        onClick={variant === "login" ? login : register}>
                             {variant==="login" ? "Sign In" : "Register"}
                         </button>
                         
