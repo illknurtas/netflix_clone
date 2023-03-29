@@ -1,11 +1,7 @@
-
-
 export default function Home() {
   return (
     <>
-      <h1 className="text-2xl text-green-500">
-        Netflix Clone
-      </h1>
+      <div className="g-gradient-to-r from-sky-500 to-indigo-500"></div>
     </>
   )
 }
