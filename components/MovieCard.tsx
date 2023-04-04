@@ -1,11 +1,12 @@
 import React from "react";
+import {BsHandThumbsUp, BsCheck} from "react-icons/bs";
+import {TbPlayerPlayFilled} from "react-icons/tb";
+import FavButton from "./FavButton";
+
 
 interface MovieCardProps{
     data: Record<string,any>;
 }
-import {AiOutlinePlus} from "react-icons/ai";
-import {BsHandThumbsUp, BsCheck} from "react-icons/bs";
-import {TbPlayerPlayFilled} from "react-icons/tb";
 
 const MovieCard:React.FC<MovieCardProps> =({data})=>{
     // if(){
@@ -38,13 +39,7 @@ const MovieCard:React.FC<MovieCardProps> =({data})=>{
                          onClick={()=>{}}>
                             <TbPlayerPlayFilled size={20}/>
                          </div>
-                        <div className="cursor-pointer w-7
-                        h-7 lg:w-10 lg:h-10 bg-[#232323] rounded-full flex
-                        justify-center items-center transition 
-                        border-2 border-[#919191] hover:border-white "
-                        onClick={()=>{}}>
-                            <AiOutlinePlus className="text-white"/>
-                        </div>
+                        <FavButton movieId={data?.id}/>
                         <div className="cursor-pointer w-7
                          h-7 lg:w-10 lg:h-10 bg-[#232323] rounded-full flex
                          justify-center items-center transition 

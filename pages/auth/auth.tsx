@@ -4,7 +4,6 @@ import axios from "axios";
 import {signIn} from "next-auth/react";
 // import { useRouter } from "next/router";
 import {FcGoogle} from "react-icons/fc";
-import {FaGithub} from "react-icons/fa";
 
 const Auth = () =>{
     const[email, setEmail] = useState('');
@@ -52,7 +51,7 @@ const Auth = () =>{
         bg-no-repeat bg-center bg-fixed bg-cover">
             <div className="bg-black w-full h-full lg:bg-opacity-50">
                 <nav className="">
-                    <img src="/img/logo.png" alt="" className="h-40"/>
+                    <img src="/img/logo.png" alt="" className="h-16 ml-4"/>
                 </nav>
                 <div className="flex justify-center">
                     <div className="bg-black bg-opacity-70 self-center px-16 py-16  mt-2 
@@ -78,7 +77,10 @@ const Auth = () =>{
                         onClick={variant === "login" ? login : register}>
                             {variant==="login" ? "Sign In" : "Register"}
                         </button>
-                        <div className="flex flex-row items-center gap-4 mt-8 justify-center">
+                        <p className="text-white text-center mt-5">
+                            {variant === "login" ? "- Login with Google Account -" : "- Register Faster with Google Account -"}
+                        </p>
+                        <div className="flex flex-row items-center gap-4 mt-4 justify-center">
                                 <div className="w-10 h-10 bg-white rounded-full
                                 flex items-center justify-center cursor-pointer
                                 hover:opacity-80 transition"
@@ -86,14 +88,6 @@ const Auth = () =>{
                                     callbackUrl:"/profile"
                                 })}>
                                     <FcGoogle size={30}/>
-                                </div>
-                                <div className="w-10 h-10 bg-white rounded-full
-                                flex items-center justify-center cursor-pointer
-                                hover:opacity-80 transition"
-                                onClick={()=>signIn("github",{
-                                    callbackUrl:"/profile"
-                                })}>
-                                    <FaGithub size={30}/>
                                 </div>
                         </div>
                         <p className="text-neutral-500 mt-12 text-base">
