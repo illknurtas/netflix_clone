@@ -2,6 +2,8 @@ import React from "react";
 import {BsHandThumbsUp, BsCheck} from "react-icons/bs";
 import {TbPlayerPlayFilled} from "react-icons/tb";
 import FavButton from "./FavButton";
+import { useRouter } from "next/router";
+
 
 
 interface MovieCardProps{
@@ -9,9 +11,7 @@ interface MovieCardProps{
 }
 
 const MovieCard:React.FC<MovieCardProps> =({data})=>{
-    // if(){
-    //     return null;
-    // }
+    const router = useRouter();
     return(
         <div className="group bg-zinc-900 col-span relative h-[12vw]">
             <img src={data.thumbnailUrl} alt="Movie Poster"
@@ -36,7 +36,7 @@ const MovieCard:React.FC<MovieCardProps> =({data})=>{
                         <div className="cursor-pointer
                          w-7 h-7 lg:w-10 lg:h-10 rounded-full flex
                          justify-center items-center transition border border-white bg-white"
-                         onClick={()=>{}}>
+                         onClick={()=>router.push(`/watch/${data?.id}`)}>
                             <TbPlayerPlayFilled size={20}/>
                          </div>
                         <FavButton movieId={data?.id}/>
@@ -59,7 +59,7 @@ const MovieCard:React.FC<MovieCardProps> =({data})=>{
                     </div>
                     <div className="flex flex-row mt-4 gap-2 items-center">
                         <p className="text-green-400 font-semibold md:text-sm">New</p>
-                        <span className="text-white flex items-center border-2 border-[#747474] px-1 md:text-[10px]">16 +</span>
+                        {/* <span className="text-white flex items-center border-2 border-[#747474] px-1 md:text-[10px]">16 +</span> */}
                         <span className="lg:text-sm text-[10px] text-white">
                             {data.duration}
                         </span>    
