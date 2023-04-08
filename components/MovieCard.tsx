@@ -1,9 +1,10 @@
 import React from "react";
-import {BsHandThumbsUp, BsCheck} from "react-icons/bs";
+import {BsHandThumbsUp} from "react-icons/bs";
 import {TbPlayerPlayFilled} from "react-icons/tb";
 import FavButton from "./FavButton";
 import { useRouter } from "next/router";
-
+import useInfoModal from "@/hooks/useInfoModal";
+import {FiChevronDown} from "react-icons/fi";
 
 
 interface MovieCardProps{
@@ -12,6 +13,8 @@ interface MovieCardProps{
 
 const MovieCard:React.FC<MovieCardProps> =({data})=>{
     const router = useRouter();
+    const {openModal} = useInfoModal();
+
     return(
         <div className="group bg-zinc-900 col-span relative h-[12vw]">
             <img src={data.thumbnailUrl} alt="Movie Poster"
@@ -47,13 +50,13 @@ const MovieCard:React.FC<MovieCardProps> =({data})=>{
                          onClick={()=>{}}>
                             <BsHandThumbsUp className="text-white"/>
                          </div>
-                         <div className="cursor-pointer w-7
+                         <div className="cursor-pointer w-7 group/item
                          h-7 lg:w-10 lg:h-10 bg-zinc-800 rounded-full flex
                          justify-center items-center transition 
                          border-2 border-[#919191] hover:border-white 
                          absolute right-0 mr-2"
-                         onClick={()=>{}}>
-                            <BsCheck className="text-white"/>
+                         onClick={()=>openModal(data?.id)}>
+                            <FiChevronDown className="text-white group:hover/item:text-white" size={20}/>
                          </div>
                          
                     </div>
